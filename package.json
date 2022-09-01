@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc && cd client && npm run build",
+    "build": "npx tsc && cd client && npm install && npm run build",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "build:ui": "cd ./client && npm install && npm run build",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
