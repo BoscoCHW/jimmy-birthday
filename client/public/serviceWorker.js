@@ -27,8 +27,11 @@ self.addEventListener('push', function(event) {
   const title = data.title;
   const options = {
     body: data.body,
-    icon: 'images/icon.png',
-    badge: 'images/badge.png'
+    icon: 'letter-g.png',
+    badge: 'letter-g.png',
+    data: {
+      url: data.url
+    }
   };
 
   /* eslint-disable-next-line no-restricted-globals */
@@ -39,10 +42,10 @@ self.addEventListener('push', function(event) {
 /* eslint-disable-next-line no-restricted-globals */
 self.addEventListener('notificationclick', function(event) {
   console.log('[Service Worker] Notification click received.');
-
+  const redirectUrl = event.notification.data.url;
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('https://developers.google.com/web')
+    clients.openWindow(redirectUrl)
   );
 });

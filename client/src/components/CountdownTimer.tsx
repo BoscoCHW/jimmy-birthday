@@ -50,9 +50,9 @@ export const CountdownTimer: React.FC<ICountdownTimerProps> = ({
         userVisibleOnly: true,
         applicationServerKey,
       })
-      .then(async (subs) => {
+      .then((subs) => {
         console.log("User is subscribed.");
-        console.log(await sendSubscriptionToBackEnd(subs));
+        sendSubscriptionToBackEnd(subs);
         subscription.current = subs;
         updateBtn();
       })

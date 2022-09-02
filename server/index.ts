@@ -33,11 +33,9 @@ app.post("/api/save-subscription", async (req, res) => {
 });
 
 app.post("/api/send-msg/", async (req, res) => {
+  const message: { title: string, body: string, url: string } = req.body;
   const subscriptions = await prisma.subscription.findMany({});
-  const payload = JSON.stringify({
-    title: "Bosco Push Test",
-    body: "Bosco's body",
-  });
+  const payload = JSON.stringify(message);
   subscriptions.forEach((sub) => {
     webpush.sendNotification(sub, payload);
   });
