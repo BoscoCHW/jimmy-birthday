@@ -33,17 +33,26 @@ app.post("/api/save-subscription", async (req, res) => {
 });
 
 app.post("/api/send-msg/", async (req, res) => {
-  const message: { title: string, body: string, url: string } = req.body;
+  const message: { title: string; body: string; url: string } = req.body;
   const subscriptions = await prisma.subscription.findMany({});
   const payload = JSON.stringify(message);
-  subscriptions.forEach(async (sub) => {
-    try {
-      await webpush.sendNotification(sub, payload);
-    } catch (err) {
-      console.log(err);
-    }
-  });
+  subscriptions.map((sub) =>
+    webpush.sendNotification(sub, payload).catch(console.error)
+  );
   res.sendStatus(204);
+});
+
+app.post("/api/delete-subscription/", async (req, res) => {
+  const subs = req.body as PushSubscription;
+  try {
+    await prisma.subscription.delete({
+      where: { endpoint: subs.endpoint },
+    });
+    res.sendStatus(204);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
 });
 
 app.get("/*", (req: Request, res: Response) => {

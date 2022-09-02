@@ -20,6 +20,10 @@ enum ButtonText {
   resetPermission = "Notification permission denied, please reset your permission.",
 }
 
+const applicationServerKey = urlB64ToUint8Array(
+  "BJthRQ5myDgc7OSXzPCMftGw-n16F7zQBEN7EUD6XxcfTTvrLGWSIG7y_JxiWtVlCFua0S8MTB5rPziBqNx1qIo"
+);
+
 export const CountdownTimer: React.FC<ICountdownTimerProps> = ({
   targetDate,
 }) => {
@@ -33,34 +37,30 @@ export const CountdownTimer: React.FC<ICountdownTimerProps> = ({
 
   const handleSubscribeButtonClick: React.MouseEventHandler<
     HTMLButtonElement
-  > = () => {
+  > = async () => {
     setButtonDisabled(true);
     if (subscription.current) {
-      // unsubscribeUser();
+      const subs = await swRegistration.current!.pushManager.getSubscription();
+      if (subs) {
+        subs.unsubscribe();
+        deleteSubscriptionOnServer(subs);
+        subscription.current = null;
+      }
     } else {
-      subscribeUser();
-    }
-  };
-  function subscribeUser() {
-    const applicationServerKey = urlB64ToUint8Array(
-      "BJthRQ5myDgc7OSXzPCMftGw-n16F7zQBEN7EUD6XxcfTTvrLGWSIG7y_JxiWtVlCFua0S8MTB5rPziBqNx1qIo"
-    );
-    swRegistration
-      .current!.pushManager.subscribe({
+      const subs = await swRegistration.current!.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey,
-      })
-      .then((subs) => {
-        console.log("User is subscribed.");
-        sendSubscriptionToBackEnd(subs);
-        subscription.current = subs;
-        updateBtn();
-      })
-      .catch((error) => {
-        console.error("Failed to subscribe the user: ", error);
-        updateBtn();
       });
-  }
+      console.log("User is subscribed.");
+      const response = await sendSubscriptionToBackEnd(subs);
+      if (response.ok) {
+        subscription.current = subs;
+      } else {
+        console.error("Server error: Failed to subscribe the user.");
+      }
+    }
+    updateBtn();
+  };
 
   function updateBtn() {
     if (Notification.permission === "denied") {
@@ -121,18 +121,24 @@ export const CountdownTimer: React.FC<ICountdownTimerProps> = ({
   }
 };
 
-function sendSubscriptionToBackEnd(subscription: PushSubscription) {
-  return fetch("/api/save-subscription/", {
+async function sendSubscriptionToBackEnd(subscription: PushSubscription) {
+  const response = await fetch("/api/save-subscription/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(subscription.toJSON()),
-  }).then(function (response) {
-    if (!response.ok) {
-      throw new Error("Bad status code from server.");
-    }
-
-    return response.json();
   });
+  return response;
+}
+
+async function deleteSubscriptionOnServer(subscription: PushSubscription) {
+  const response = await fetch(`/api/delete-subscription/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(subscription.toJSON()),
+  });
+  return response;
 }

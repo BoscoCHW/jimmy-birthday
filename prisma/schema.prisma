@@ -12,7 +12,7 @@ datasource db {
 
 model Subscription {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  endpoint          String
+  endpoint          String  @unique
   expirationTime    DateTime?
   keys               Keys
 }
