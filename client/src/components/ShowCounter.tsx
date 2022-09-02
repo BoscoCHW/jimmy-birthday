@@ -5,6 +5,7 @@ import {
   counterStyle,
   numberCardStyle,
   numberCardsWrapperStyle,
+  timeComponentTextStyle,
   timeComponentWrapperStyle,
 } from "../styles/ShowCounterStyles";
 
@@ -24,7 +25,7 @@ export const ShowCounter: React.FC<IShowCounterProps> = ({
   return (
     <div className={counterStyle}>
       <div className={timeComponentWrapperStyle}>
-        <span>DAYS</span>
+        <span className={timeComponentTextStyle}>DAYS</span>
         <div className={numberCardsWrapperStyle}>
           <span className={numberCardStyle}>{getNumberDigit(days, 0)}</span>
           <span className={numberCardStyle}>{getNumberDigit(days, 1)}</span>
@@ -32,7 +33,7 @@ export const ShowCounter: React.FC<IShowCounterProps> = ({
       </div>
       {makeColon()}
       <div className={timeComponentWrapperStyle}>
-        <span>HOURS</span>
+        <span className={timeComponentTextStyle}>HOURS</span>
         <div className={numberCardsWrapperStyle}>
           <span className={numberCardStyle}>{getNumberDigit(hours, 0)}</span>
           <span className={numberCardStyle}>{getNumberDigit(hours, 1)}</span>
@@ -40,7 +41,7 @@ export const ShowCounter: React.FC<IShowCounterProps> = ({
       </div>
       {makeColon()}
       <div className={timeComponentWrapperStyle}>
-        <span>MINUTES</span>
+        <span className={timeComponentTextStyle}>MINUTES</span>
         <div className={numberCardsWrapperStyle}>
           <span className={numberCardStyle}>{getNumberDigit(minutes, 0)}</span>
           <span className={numberCardStyle}>{getNumberDigit(minutes, 1)}</span>
@@ -48,7 +49,7 @@ export const ShowCounter: React.FC<IShowCounterProps> = ({
       </div>
       {makeColon()}
       <div className={timeComponentWrapperStyle}>
-        <span>SECONDS</span>
+        <span className={timeComponentTextStyle}>SECONDS</span>
         <div className={numberCardsWrapperStyle}>
           <span className={numberCardStyle}>{getNumberDigit(seconds, 0)}</span>
           <span className={numberCardStyle}>{getNumberDigit(seconds, 1)}</span>
