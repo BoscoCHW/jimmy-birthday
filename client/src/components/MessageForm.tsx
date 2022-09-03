@@ -81,7 +81,11 @@ export const MessageForm: React.FC = () => {
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ title, message, url }),
+                body: JSON.stringify({
+                  title,
+                  body: message,
+                  url: url ? url : "https://glen-birthday.herokuapp.com/",
+                }),
               });
             }
             resetInputs();
