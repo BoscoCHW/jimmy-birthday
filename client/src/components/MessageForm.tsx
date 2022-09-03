@@ -11,12 +11,10 @@ import {
 export const MessageForm: React.FC = () => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
-  const [url, setUrl] = useState("");
   const [passphrase, setPassphrase] = useState("");
   const resetInputs = () => {
     setTitle("");
     setMessage("");
-    setUrl("");
     setPassphrase("");
   };
   return (
@@ -49,17 +47,6 @@ export const MessageForm: React.FC = () => {
           ></textarea>
         </div>
         <div className={inputWrapperStyle}>
-          <label htmlFor="url">Redirection URL:</label>
-          <input
-            className={inputStyle}
-            type="text"
-            name="url"
-            id="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-        </div>
-        <div className={inputWrapperStyle}>
           <label htmlFor="passphrase">Passphrase:</label>
           <input
             className={inputStyle}
@@ -84,7 +71,7 @@ export const MessageForm: React.FC = () => {
                 body: JSON.stringify({
                   title,
                   body: message,
-                  url: url ? url : "https://glen-birthday.herokuapp.com/",
+                  url: "https://glen-birthday.herokuapp.com/",
                 }),
               });
             }
