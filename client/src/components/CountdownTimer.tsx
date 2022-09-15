@@ -14,7 +14,7 @@ interface ICountdownTimerProps {
 }
 
 enum ButtonText {
-  enable = "Subscribe to updates about Glen's birthday",
+  enable = "Subscribe to updates about Jimmy's birthday",
   disable = "Disable Push Messaging",
   notSupported = "Push Notification Not Supported",
   resetPermission = "Notification permission denied, please reset your permission.",
@@ -103,7 +103,7 @@ export const CountdownTimer: React.FC<ICountdownTimerProps> = ({
     return (
       <div className={countdownTimerWrapperStyle}>
         <div className={countdownTimerHeadingStyle}>
-          Hi Glen! Your birthday is happening in
+          Jimmy's birthday is happening in
         </div>
         <ShowCounter
           days={days}

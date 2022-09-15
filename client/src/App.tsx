@@ -6,7 +6,7 @@ import { MessageForm } from "./components/MessageForm";
 const App: React.FC = () => {
   return (
     <div className={appWrapperStyle}>
-      <CountdownTimer targetDate="12 Oct 2022" />
+      <CountdownTimer targetDate="15 Dec 2022" />
       <MessageForm />
     </div>
   );
