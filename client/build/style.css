@@ -4,5 +4,6 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-image: url("./sakura-leaves.gif");
+  background-image: url("./bg-2.gif");
+  background-size:cover;
 }

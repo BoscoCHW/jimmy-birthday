@@ -71,7 +71,7 @@ export const MessageForm: React.FC = () => {
                 body: JSON.stringify({
                   title,
                   body: message,
-                  url: "https://glen-birthday.herokuapp.com/",
+                  url: "https://jimmy-birthday.herokuapp.com/",
                 }),
               });
             }

@@ -27,8 +27,8 @@ self.addEventListener('push', function(event) {
   const title = data.title;
   const options = {
     body: data.body,
-    icon: 'letter-g.png',
-    badge: 'letter-g.png',
+    icon: 'j-letter.png',
+    badge: 'j-letter.png',
     data: {
       url: data.url
     }
