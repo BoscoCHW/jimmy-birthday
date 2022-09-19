@@ -3,9 +3,9 @@ import { style } from "typestyle";
 export const messageFormWrapperStyle = style({
   fontFamily:
     "system-ui,-apple-system,system-ui,'Helvetica Neue',Helvetica,Arial,sans-serif",
-  border: "1px solid rgba(0, 0, 0, 0.1)",
+  border: "1px solid aliceblue",
   borderRadius: ".25rem",
-  boxShadow: "rgba(0, 0, 0, 0.02) 0 1px 3px 0",
+  boxShadow: "aliceblue 0 1px 3px 0",
   padding: "1rem",
   margin: "1rem",
 });
@@ -14,6 +14,7 @@ export const messageFormHeadingStyle = style({
   fontSize: "1rem",
   textAlign: "center",
   margin: "0 0 20px 0",
+  color: "aliceblue",
 });
 
 export const messageFormStyle = style({
@@ -21,6 +22,7 @@ export const messageFormStyle = style({
   flexDirection: "column",
   alignItems: "center",
   rowGap: "10px",
+  color: "white",
 });
 
 export const inputWrapperStyle = style({

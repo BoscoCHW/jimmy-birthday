@@ -12,12 +12,13 @@ export const timeComponentWrapperStyle = style({
   flexDirection: "column",
   alignItems: "center",
   columnGap: "5px",
+  color: "aliceblue",
 });
 
 export const timeComponentTextStyle = style({
   fontFamily:
     "system-ui,-apple-system,system-ui,'Helvetica Neue',Helvetica,Arial,sans-serif",
-  fontWeight: "400"
+  fontWeight: "400",
 });
 
 export const numberCardsWrapperStyle = style({

@@ -9,6 +9,7 @@ export const countdownTimerHeadingStyle = style({
     "system-ui,-apple-system,system-ui,'Helvetica Neue',Helvetica,Arial,sans-serif",
   fontWeight: "600",
   fontSize: "1.1rem",
+  color: "aliceblue"
 });
 
 export const subscribeButtonStyle = style({
